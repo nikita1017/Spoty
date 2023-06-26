@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/register.css'%}">
+    <link rel="icon" href="{%static 'css/icon.png'%}">
+</head>
+<body>
+    <h1>ЭТО РЕГИСТРАЦИЯ</h1>
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <p>
+            {{ field.label_tag }} <br>
+            {{ field }}
+        </p>
+        {% endfor %}
+        <button>Зарегистрировваться</button>
+    </form>
+</body>
+</html>

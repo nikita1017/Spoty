@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoty | Главная</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <link rel="icon" href="{%static 'css/icon.png'%}">
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><img src="{%static 'images/s.png'%}" alt="" width="32px"></span>
+                        <span class="title">Spoty</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Учетная запись</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="chatbubble-ellipses-outline"></ion-icon></span>
+                        <span class="title">Сообщение</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
+                        <span class="title">Помощь</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title">Настройки</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                        <span class="title">Сменить пароль</span>
+                    </a>
+                </li>
+                <li>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'signOut' %}">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">Выйти</span>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'register' %}">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">Быстрая регистрация</span>
+                    </a>
+                    {% endif %}
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <main>
+        <div class="main-info">
+            <h1>Это главная страница</h1>
+
+            <div class="posts">
+                {% for post in posts %}
+                <div class="post-test">
+                    <h1>Автор: {{post.author}}</h1>
+                    <h3>Название: {{post.title}}</h3>
+                    <p>Описание: {{post.text}}</p>
+                </div>
+                {% endfor %}
+            </div>    
+
+        </div>
+        <div class="account-info">
+            <h1>Это друзья</h1>
+        </div>
+        <div class="sms-info">
+            <h1>Это сообщения</h1>
+        </div>
+        <div class="help-info">
+            <h1>Это помощь по сайту</h1>
+        </div>
+        <div class="settings-info">
+            <h1>Это настройки</h1>
+        </div>
+        <div class="change-password">
+            <h1>Это сменить пароль</h1>
+        </div>
+
+    </main>
+
+    <script>
+        let list = document.querySelectorAll('.navigation li');
+        function activeLink(){
+            list.forEach((item) =>
+            item.classList.remove('active'));
+            this.classList.add('active');
+        }
+        list.forEach((item) =>
+        item.addEventListener('mouseover', activeLink))
+
+        
+
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="{%static 'js/react.js'%}" type="text/babel"></script>
+
+</body>
+</html>
